@@ -64,6 +64,10 @@ bool q_insert_head(queue_t *q, char *s)
     }
     newh->next = q->head;
     q->head = newh;
+    /* Check whether queue is empty*/
+    if (!q->tail) {
+        q->tail = newh;
+    }
     q->size++;
     return true;
 }
