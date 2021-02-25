@@ -97,7 +97,12 @@ bool q_insert_tail(queue_t *q, char *s)
         newh->value = value;
     }
     newh->next = NULL;
-    q->tail->next = newh;
+    /* Check whether queue is empty*/
+    if (!q->head) {
+        q->head = newh;
+    } else {
+        q->tail->next = newh;
+    }
     q->tail = newh;
     q->size++;
     return true;
