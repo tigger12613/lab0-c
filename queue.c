@@ -125,12 +125,12 @@ bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
     if (!q || !q->head) {
         return false;
     }
-    if (sp) {
-        size_t tmp = bufsize > (strlen(q->head->value) + 1)
-                         ? (strlen(q->head->value) + 1)
-                         : bufsize;
+    if (sp && q->head->value) {
+        size_t tmp = bufsize - 1 > (strlen(q->head->value))
+                         ? (strlen(q->head->value))
+                         : bufsize - 1;
         strncpy(sp, q->head->value, tmp);
-        sp[tmp - 1] = '\0';
+        sp[tmp] = '\0';
     }
     /*Check whether is there only one element*/
     if (q->tail == q->head) {
