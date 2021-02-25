@@ -118,8 +118,6 @@ bool q_insert_tail(queue_t *q, char *s)
  */
 bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
 {
-    /* TODO: You need to fix up this code. */
-    /* TODO: Remove the above comment when you are about to implement. */
     if (!q || !q->head) {
         return false;
     }
@@ -129,6 +127,10 @@ bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
                          : bufsize;
         strncpy(sp, q->head->value, tmp);
         sp[tmp - 1] = '\0';
+    }
+    /*Check whether is there only one element*/
+    if (q->tail == q->head) {
+        q->tail = NULL;
     }
     list_ele_t *tmp = q->head;
     q->head = q->head->next;
