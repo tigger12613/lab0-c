@@ -87,6 +87,10 @@ bool q_insert_tail(queue_t *q, char *s)
     newh->value = NULL;
     if (s) {
         char *value = malloc((strlen(s) + 1) * sizeof(char));
+        if (!value) {
+            free(newh);
+            return false;
+        }
         memcpy(value, s, strlen(s) + 1);
         newh->value = value;
     }
