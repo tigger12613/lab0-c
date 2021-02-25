@@ -187,6 +187,61 @@ void q_reverse(queue_t *q)
  */
 void q_sort(queue_t *q)
 {
-    /* TODO: You need to write the code for this function */
-    /* TODO: Remove the above comment when you are about to implement. */
+    if (!q || !q->head) {
+        return;
+    }
+    q->head = merge_sort(q->head);
+    while (q->tail->next) {
+        q->tail = q->tail->next;
+    }
+}
+list_ele_t *merge(list_ele_t *left, list_ele_t *right)
+{
+    list_ele_t *head = NULL;
+    list_ele_t *tail = NULL;
+    while (left && right) {
+        if (strcmp(left->value, right->value) <= 0) {
+            if (!head) {
+                head = left;
+                tail = left;
+            } else {
+                tail->next = left;
+                tail = left;
+            }
+            left = left->next;
+        } else {
+            if (!head) {
+                head = right;
+                tail = right;
+            } else {
+                tail->next = right;
+                tail = right;
+            }
+            right = right->next;
+        }
+    }
+    if (left) {
+        tail->next = left;
+    }
+    if (right) {
+        tail->next = right;
+    }
+    return head;
+}
+
+list_ele_t *merge_sort(list_ele_t *head)
+{
+    if (!head || !head->next) {
+        return head;
+    }
+    list_ele_t *fast = head->next, *slow = head;
+    while (fast && fast->next) {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    fast = slow->next;
+    slow->next = NULL;
+    list_ele_t *left = merge_sort(head);
+    list_ele_t *right = merge_sort(fast);
+    return merge(left, right);
 }
