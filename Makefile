@@ -76,4 +76,7 @@ clean:
 	rm -rf *.dSYM
 	(cd traces; rm -f *~)
 
+format:
+	clang-format -i *.[ch]
+	
 -include $(deps)
