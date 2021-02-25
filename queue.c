@@ -58,7 +58,8 @@ bool q_insert_head(queue_t *q, char *s)
             free(newh);
             return false;
         }
-        memcpy(value, s, strlen(s) + 1);
+        strncpy(value, s, strlen(s));
+        value[strlen(s)] = '\0';
         newh->value = value;
     }
     newh->next = q->head;
@@ -91,7 +92,8 @@ bool q_insert_tail(queue_t *q, char *s)
             free(newh);
             return false;
         }
-        memcpy(value, s, strlen(s) + 1);
+        strncpy(value, s, strlen(s));
+        value[strlen(s)] = '\0';
         newh->value = value;
     }
     newh->next = NULL;
