@@ -24,6 +24,10 @@ queue_t *q_new()
 /* Free all storage used by queue */
 void q_free(queue_t *q)
 {
+    if (!q) {
+        return;
+    }
+
     while (q->head) {
         list_ele_t *tmp = q->head;
         q->head = q->head->next;
@@ -150,6 +154,9 @@ bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
  */
 int q_size(queue_t *q)
 {
+    if (!q) {
+        return 0;
+    }
     return q->size;
 }
 
