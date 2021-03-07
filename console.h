@@ -8,7 +8,7 @@
 /* Implementation of simple command-line interface */
 
 /* Simulation flag of console option */
-extern bool simulation;
+extern int simulation;
 
 /* Each command defined in terms of a function */
 typedef bool (*cmd_function)(int argc, char *argv[]);
@@ -81,6 +81,5 @@ bool run_console(char *infile_name);
 /* Callback function to complete command by linenoise */
 void completion(const char *buf, linenoiseCompletions *lc);
 
-int *btoi(bool b);
 
 #endif /* LAB0_CONSOLE_H */
